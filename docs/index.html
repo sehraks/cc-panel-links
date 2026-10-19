@@ -3,21 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CC GUILD PANEL</title>
-  <meta name="description" content="Permanent entry point for the CC Discord GUILD PANEL.">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="The official entry point for the CC Discord guild management panel.">
+  <title>CC GUILD PANEL · Server Control Center</title>
   <style>
-    :root { color-scheme: dark; }
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; box-sizing: border-box; background: #111318; color: #f4f5f7; font: 16px/1.6 system-ui, sans-serif; }
-    main { max-width: 560px; padding: 32px; border: 1px solid #303541; border-radius: 20px; background: #191c24; }
-    h1 { margin-top: 0; } p { color: #c5cad4; }
+    :root { color-scheme: dark; --bg: #0b1020; --panel: rgba(20, 27, 48, .88); --line: rgba(160, 177, 220, .16); --text: #f4f7ff; --muted: #a8b3cc; --accent: #8b9cff; --cyan: #75e1e8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; padding: 24px 16px; display: grid; place-items: center; overflow-x: hidden; background: radial-gradient(ellipse at 15% 10%, rgba(87,105,230,.22), transparent 38%), radial-gradient(ellipse at 90% 90%, rgba(40,190,205,.12), transparent 35%), var(--bg); color: var(--text); font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { width: min(100%, 620px); padding: clamp(26px, 6vw, 48px); border: 1px solid var(--line); border-radius: 28px; background: var(--panel); box-shadow: 0 24px 80px rgba(0,0,0,.28); backdrop-filter: blur(18px); }
+    .brand { display: flex; align-items: center; gap: 13px; margin-bottom: 44px; }
+    .mark { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(145deg, #8999ff, #6571e8 58%, #4e58bd); color: white; font-size: 15px; font-weight: 850; letter-spacing: -.06em; box-shadow: 0 8px 24px rgba(103,119,240,.26); }
+    .brand-name { font-size: 14px; font-weight: 800; letter-spacing: .13em; }
+    .brand-sub { color: var(--muted); font-size: 12px; letter-spacing: .04em; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 18px; padding: 7px 11px; border: 1px solid rgba(117,225,232,.2); border-radius: 999px; background: rgba(117,225,232,.06); color: var(--cyan); font-size: 11px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); }
+    h1 { max-width: 490px; margin: 0; font-size: clamp(34px, 7vw, 50px); line-height: 1.08; letter-spacing: -.055em; }
+    h1 span { color: var(--accent); }
+    .lead { max-width: 480px; margin: 20px 0 32px; color: var(--muted); font-size: 16px; }
+    .steps { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+    .step { display: flex; gap: 14px; align-items: flex-start; padding: 16px; border: 1px solid var(--line); border-radius: 17px; background: rgba(8,13,29,.34); }
+    .step-num { display: grid; flex: 0 0 32px; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: rgba(139,156,255,.12); color: #c4ceff; font-size: 12px; font-weight: 850; }
+    .step strong { display: block; font-size: 14px; }
+    .step p { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
+    .tip { margin-top: 24px; padding: 15px 16px; border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; background: rgba(139,156,255,.07); color: var(--muted); font-size: 13px; }
+    code { padding: 3px 7px; border: 1px solid var(--line); border-radius: 7px; background: rgba(8,13,29,.5); color: #e0e5ff; font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; }
+    .footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--line); color: #7f8ba8; font-size: 12px; }
+    @media (max-width: 420px) { main { border-radius: 23px; } .brand { margin-bottom: 34px; } .lead { font-size: 15px; } .step { padding: 13px; } }
   </style>
 </head>
 <body>
   <main>
-    <h1>CC GUILD PANEL</h1>
-    <p>This is the permanent entry point for the CC GUILD PANEL.</p>
-    <p>Open the guild-specific link sent by the CC bot using <code>/guildpanel</code>.</p>
-    <p>If you manage CC, the redirect destination can be updated here when the bot moves to a different host.</p>
+    <div class="brand">
+      <div class="mark" aria-hidden="true">CC</div>
+      <div><div class="brand-name">CC GUILD PANEL</div><div class="brand-sub">SERVER CONTROL CENTER</div></div>
+    </div>
+    <div class="eyebrow"><span class="dot" aria-hidden="true"></span> Official panel gateway</div>
+    <h1>Your server.<br><span>Your settings.</span></h1>
+    <p class="lead">A central place to manage your CC bot’s guild settings, moderation tools, and server features.</p>
+    <ul class="steps">
+      <li class="step"><span class="step-num">01</span><div><strong>Open Discord</strong><p>Go to the server where CC is installed.</p></div></li>
+      <li class="step"><span class="step-num">02</span><div><strong>Run the panel command</strong><p>Use <code>/guildpanel</code> to request your private, guild-specific link.</p></div></li>
+      <li class="step"><span class="step-num">03</span><div><strong>Manage your guild</strong><p>Open the link sent by the bot to access your dashboard.</p></div></li>
+    </ul>
+    <div class="tip"><strong>Security tip:</strong> Keep your panel link private. If you think it has been shared, ask the bot owner to revoke the token and issue a new one.</div>
+    <div class="footer"><span>CC · Guild management, made simpler.</span><span>Secure access · Mobile friendly</span></div>
   </main>
 </body>
 </html>
