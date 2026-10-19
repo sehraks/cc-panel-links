@@ -47,6 +47,8 @@
     .btn-secondary { border-color: var(--border); background: var(--surface); color: var(--text-1); }
     .btn-secondary:hover { border-color: rgba(91,138,245,.35); background: var(--surface-2); }
     .btn .material-icons { font-size: 18px; }
+    .btn[aria-disabled="true"] { cursor: not-allowed; opacity: .78; transform: none; }
+    .coming-soon { padding: 3px 6px; border: 1px solid rgba(255,255,255,.12); border-radius: 5px; color: var(--text-2); font-size: 9px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
     .helper { margin-top: 14px; color: var(--text-3); font-size: 12px; }
     .preview { position: relative; padding: 14px; border: 1px solid var(--border); border-radius: 18px; background: linear-gradient(145deg,rgba(91,138,245,.08),transparent 55%),var(--surface); box-shadow: var(--shadow); }
     .preview::before { content: ''; position: absolute; width: 150px; height: 150px; top: -38px; right: -24px; z-index: -1; border-radius: 50%; background: rgba(91,138,245,.12); filter: blur(35px); }
@@ -116,11 +118,11 @@
         <div class="eyebrow"><span class="material-icons" aria-hidden="true">smart_toy</span> Built for your Discord community</div>
         <h1>Your server.<br><span>Your community.</span><br>One place.</h1>
         <p class="hero-copy">Meet CC — community tools and server controls designed to make managing your Discord community feel simpler, clearer, and more connected.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#guild-panel"><span class="material-icons" aria-hidden="true">dashboard</span> Explore the Guild Panel</a>
-          <a class="btn btn-secondary" href="#features"><span class="material-icons" aria-hidden="true">arrow_downward</span> Discover CC</a>
+        <div class="actions" aria-label="CC actions">
+          <span class="btn btn-primary" aria-disabled="true" title="Discord sign-in is being prepared"><span class="material-icons" aria-hidden="true">login</span> Login with Discord <span class="coming-soon">Coming soon</span></span>
+          <span class="btn btn-secondary" aria-disabled="true" title="The installation link will be enabled when setup is complete"><span class="material-icons" aria-hidden="true">add_to_home_screen</span> Add CC to Discord <span class="coming-soon">Coming soon</span></span>
         </div>
-        <p class="helper">A consistent, mobile-friendly experience for your CC server tools.</p>
+        <p class="helper">Discord sign-in and bot installation will be available here once setup is complete.</p>
       </div>
 
       <div class="preview" role="img" aria-label="Illustration of a dark CC guild dashboard with navigation and status cards">
@@ -175,7 +177,7 @@
         <div>
           <div class="section-kicker">CC Guild Panel</div>
           <h2>Ready to manage your server?</h2>
-          <p class="access-copy">Panel access currently uses the existing private guild link. We’re keeping that flow in place while the permanent Discord sign-in experience is planned.</p>
+          <p class="access-copy">Discord sign-in is being prepared. Until it is ready, you can continue using CC’s existing private guild-panel link.</p>
           <div class="security-note"><strong>Keep your link private.</strong> It grants access to your guild panel. If it may have been shared, ask the bot owner to revoke the token and issue a new one.</div>
         </div>
         <ol class="steps">
