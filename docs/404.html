@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Opening CC GUILD PANEL…</title>
+  <meta name="robots" content="noindex">
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; box-sizing: border-box; background: #111318; color: #f4f5f7; font: 16px/1.6 system-ui, sans-serif; }
+    main { max-width: 520px; padding: 28px; border: 1px solid #303541; border-radius: 18px; background: #191c24; }
+    p { color: #c5cad4; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Opening CC GUILD PANEL…</h1>
+    <p>Please wait while we send you to the current panel host.</p>
+    <p id="fallback">If you are not redirected, check that your guild panel link is correct.</p>
+  </main>
+  <script>
+    (function () {
+      // Update this value whenever cc-main moves to a new public host.
+      var currentHost = "https://sehraks-dc-bot-production.up.railway.app";
+      var projectPrefix = "/cc-panel-links";
+      var path = window.location.pathname;
+
+      // GitHub Pages project sites include the repository name in the path.
+      if (path.indexOf(projectPrefix + "/") === 0) {
+        path = path.slice(projectPrefix.length);
+      }
+
+      // Forward only expected guild panel routes; never accept a destination URL from query parameters.
+      if (!/^\/guild\/[0-9]{5,25}(?:\/|$)/.test(path)) {
+        document.getElementById("fallback").textContent =
+          "That link does not look like a valid guild panel route. Please run /guildpanel again in Discord.";
+        return;
+      }
+
+      window.location.replace(currentHost + path + window.location.search + window.location.hash);
+    })();
+  </script>
+</body>
+</html>
