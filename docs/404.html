@@ -3,19 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Opening CC GUILD PANEL…</title>
+  <meta name="theme-color" content="#0b1020">
   <meta name="robots" content="noindex">
+  <title>Opening CC GUILD PANEL…</title>
   <style>
-    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; box-sizing: border-box; background: #111318; color: #f4f5f7; font: 16px/1.6 system-ui, sans-serif; }
-    main { max-width: 520px; padding: 28px; border: 1px solid #303541; border-radius: 18px; background: #191c24; }
-    p { color: #c5cad4; }
+    :root { color-scheme: dark; --bg: #0b1020; --panel: rgba(20, 27, 48, .88); --line: rgba(160, 177, 220, .16); --text: #f4f7ff; --muted: #a8b3cc; --accent: #8b9cff; --cyan: #75e1e8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 24px 16px; overflow-x: hidden; background: radial-gradient(ellipse at 15% 10%, rgba(87, 105, 230, .22), transparent 38%), radial-gradient(ellipse at 90% 90%, rgba(40, 190, 205, .12), transparent 35%), var(--bg); color: var(--text); font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { width: min(100%, 490px); position: relative; padding: clamp(26px, 6vw, 42px); border: 1px solid var(--line); border-radius: 28px; background: var(--panel); box-shadow: 0 24px 80px rgba(0,0,0,.28); backdrop-filter: blur(18px); }
+    .brand { display: flex; align-items: center; gap: 13px; margin-bottom: 34px; }
+    .mark { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(145deg, #8999ff, #6571e8 58%, #4e58bd); color: white; font-size: 15px; font-weight: 850; letter-spacing: -.06em; box-shadow: 0 8px 24px rgba(103, 119, 240, .26); }
+    .brand-name { font-size: 14px; font-weight: 800; letter-spacing: .13em; }
+    .brand-sub { color: var(--muted); font-size: 12px; letter-spacing: .04em; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; color: var(--cyan); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 5px rgba(117,225,232,.10); }
+    h1 { margin: 0; font-size: clamp(28px, 6vw, 36px); line-height: 1.15; letter-spacing: -.045em; }
+    .intro { margin: 14px 0 26px; color: var(--muted); font-size: 15px; }
+    .status { display: flex; align-items: center; gap: 14px; padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: rgba(8, 13, 29, .42); }
+    .spinner { flex: 0 0 auto; width: 27px; height: 27px; border: 3px solid rgba(139,156,255,.2); border-top-color: var(--accent); border-right-color: var(--cyan); border-radius: 50%; animation: spin .85s linear infinite; }
+    .status-title { display: block; font-size: 14px; font-weight: 750; }
+    .status-copy { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+    .track { height: 4px; margin-top: 18px; overflow: hidden; border-radius: 99px; background: rgba(160,177,220,.12); }
+    .track span { display: block; width: 42%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--cyan)); animation: progress 1.6s ease-in-out infinite; }
+    .footer { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); color: #7f8ba8; font-size: 12px; }
+    .footer a { color: #c4ceff; text-underline-offset: 3px; }
+    .fallback { display: none; margin-top: 18px; padding: 15px; border: 1px solid rgba(255, 190, 110, .25); border-radius: 14px; background: rgba(255,190,110,.06); color: #f1d4a7; font-size: 13px; }
+    .fallback a { display: inline-block; margin-top: 9px; color: white; font-weight: 750; }
+    body.error .eyebrow { color: #ffca91; }
+    body.error .pulse { background: #ffca91; box-shadow: 0 0 0 5px rgba(255,202,145,.1); }
+    body.error .spinner, body.error .track { display: none; }
+    body.error .fallback { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes progress { 0% { transform: translateX(-110%); } 100% { transform: translateX(260%); } }
+    @media (max-width: 420px) { main { border-radius: 23px; } .brand { margin-bottom: 28px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; } }
   </style>
 </head>
 <body>
   <main>
-    <h1>Opening CC GUILD PANEL…</h1>
-    <p>Please wait while we send you to the current panel host.</p>
-    <p id="fallback">If you are not redirected, check that your guild panel link is correct.</p>
+    <div class="brand" aria-label="CC GUILD PANEL">
+      <div class="mark" aria-hidden="true">CC</div>
+      <div><div class="brand-name">CC GUILD PANEL</div><div class="brand-sub">SERVER CONTROL CENTER</div></div>
+    </div>
+    <div class="eyebrow"><span class="pulse" aria-hidden="true"></span><span id="eyebrow">Secure handoff</span></div>
+    <h1 id="heading">Taking you to your panel.</h1>
+    <p class="intro" id="intro">We’re connecting you to the current CC dashboard. This should only take a moment.</p>
+    <div class="status" role="status" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <div><span class="status-title" id="status-title">Preparing your workspace</span><span class="status-copy" id="status-copy">Checking your guild panel link…</span></div>
+    </div>
+    <div class="track" aria-hidden="true"><span></span></div>
+    <div class="fallback" id="fallback">This link doesn’t look like a valid guild panel address. Open Discord and run <strong>/guildpanel</strong> again to get a fresh link.</div>
+    <div class="footer">CC · Guild management, made simpler.<br><span id="footer-note">If the page doesn’t open automatically, you can continue manually.</span> <a id="manual-link" href="#" hidden>Open panel</a></div>
   </main>
   <script>
     (function () {
@@ -23,19 +62,32 @@
       var projectPrefix = "/cc-panel-links";
       var path = window.location.pathname;
 
-      // GitHub Pages project sites include the repository name in the path.
       if (path.indexOf(projectPrefix + "/") === 0) {
         path = path.slice(projectPrefix.length);
       }
 
-      // Forward only expected guild panel routes; never accept a destination URL from query parameters.
-      if (!/^\/guild\/[0-9]{5,25}(?:\/|$)/.test(path)) {
-        document.getElementById("fallback").textContent =
-          "That link does not look like a valid guild panel route. Please run /guildpanel again in Discord.";
+      var routeIsValid = /^\/guild\/[0-9]{5,25}(?:\/|$)/.test(path);
+      var fallback = document.getElementById("fallback");
+      var manualLink = document.getElementById("manual-link");
+
+      if (!routeIsValid) {
+        document.body.classList.add("error");
+        document.title = "Invalid link · CC GUILD PANEL";
+        document.getElementById("eyebrow").textContent = "Link needs attention";
+        document.getElementById("heading").textContent = "We couldn’t find that panel.";
+        document.getElementById("intro").textContent = "The address may be incomplete or outdated. No changes have been made.";
+        document.getElementById("status-title").textContent = "Guild link not recognized";
+        document.getElementById("status-copy").textContent = "Get a new guild-specific link from the CC bot.";
+        fallback.style.display = "block";
+        document.getElementById("footer-note").textContent = "For your security, only valid guild panel routes are forwarded.";
         return;
       }
 
-      window.location.replace(currentHost + path + window.location.search + window.location.hash);
+      var destination = currentHost + path + window.location.search + window.location.hash;
+      manualLink.href = destination;
+      manualLink.hidden = false;
+      document.getElementById("status-copy").textContent = "Guild route verified · redirecting now";
+      window.location.replace(destination);
     })();
   </script>
 </body>
